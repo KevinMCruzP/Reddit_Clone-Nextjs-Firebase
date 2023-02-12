@@ -1,5 +1,6 @@
 import { authModalState } from "@/src/atoms/authModalAtom";
 import { auth } from "@/src/firebase/clientApp";
+import { FIREBASE_ERRORS } from "@/src/firebase/errors";
 import { Button, Flex, Input, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
@@ -29,7 +30,6 @@ export default function SignUp() {
       return;
     }
 
-    console.log(SignUpForm.email + " and " + SignUpForm.password);
     createUserWithEmailAndPassword(SignUpForm.email, SignUpForm.password);
   };
 
@@ -102,9 +102,10 @@ export default function SignUp() {
         bg="gray.50"
         required
       />
-      {error && (
+      {(error || userError) && (
         <Text textAlign="center" color="red" fontSize="10pt">
-          {error}
+          {error ||
+            FIREBASE_ERRORS[userError?.message as keyof typeof FIREBASE_ERRORS]}
         </Text>
       )}
 
