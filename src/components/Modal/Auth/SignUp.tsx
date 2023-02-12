@@ -1,20 +1,40 @@
 import { authModalState } from "@/src/atoms/authModalAtom";
+import { auth } from "@/src/firebase/clientApp";
 import { Button, Flex, Input, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useSetRecoilState } from "recoil";
 
 export default function SignUp() {
   const setAuthModalState = useSetRecoilState(authModalState);
-  const [loginForm, setLoginForm] = useState({
+  const [SignUpForm, setSignUpForm] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
   });
+  const [error, setError] = useState("");
+
+  const [createUserWithEmailAndPassword, user, loading, userError] =
+    useCreateUserWithEmailAndPassword(auth);
 
   //Firebase logic
-  const onSubmit = () => {};
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (error) {
+      setError("");
+    }
+
+    if (SignUpForm.password !== SignUpForm.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    console.log(SignUpForm.email + " and " + SignUpForm.password);
+    createUserWithEmailAndPassword(SignUpForm.email, SignUpForm.password);
+  };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginForm((prev) => ({
+    setSignUpForm((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
     }));
@@ -82,8 +102,20 @@ export default function SignUp() {
         bg="gray.50"
         required
       />
+      {error && (
+        <Text textAlign="center" color="red" fontSize="10pt">
+          {error}
+        </Text>
+      )}
 
-      <Button type="submit" width="100%" height="36px" mb={2} mt={2}>
+      <Button
+        type="submit"
+        width="100%"
+        height="36px"
+        mb={2}
+        mt={2}
+        isLoading={loading}
+      >
         Sign Up
       </Button>
       <Flex fontSize="9pt" justifyContent="center">
