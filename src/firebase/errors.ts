@@ -13,4 +13,7 @@ export const FIREBASE_ERRORS = {
   "Firebase: Error (auth/invalid-credential).": "Invalid credential.",
   "Firebase: Error (auth/invalid-verification-code).":
     "Invalid verification code.",
+  "Firebase: Error (auth/invalid-verification-id).": "Invalid verification ID.",
+  "Firebase: Error (auth/missing-verification-code).":
+    "Missing verification code.",
 };

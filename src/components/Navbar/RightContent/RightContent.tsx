@@ -1,13 +1,23 @@
-import { Flex } from "@chakra-ui/react";
+import { auth } from "@/src/firebase/clientApp";
+import { Button, Flex } from "@chakra-ui/react";
+import { signOut } from "firebase/auth";
 import AuthModal from "../../Modal/Auth/AuthModal";
 import AuthButtons from "./AuthButtons";
 
-export default function RightContent() {
+type RightContentProps = {
+  user: any;
+};
+
+export default function RightContent({ user }: RightContentProps) {
   return (
     <>
       <AuthModal />
       <Flex justify="center" align="center">
-        <AuthButtons />
+        {user ? (
+          <Button onClick={() => signOut(auth)}>Logout</Button>
+        ) : (
+          <AuthButtons />
+        )}
       </Flex>
     </>
   );
