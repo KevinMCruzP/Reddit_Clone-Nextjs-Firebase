@@ -13,7 +13,8 @@ export default function Icons() {
       <Flex
         display={{ base: "none", md: "flex" }}
         align="center"
-        borderRight="1px solid gray.200"
+        borderRight="1px solid"
+        borderRightColor="gray.200"
       >
         <Flex
           mr={1.5}
