@@ -1,6 +1,7 @@
 import { Community } from "@/src/atoms/communitiesAtom";
+import { Header } from "@/src/components/Community/Header";
+import { CommunityNotFound } from "@/src/components/Community/NotFound";
 import { firestore } from "@/src/firebase/clientApp";
-import { Flex } from "@chakra-ui/react";
 import { doc, getDoc } from "firebase/firestore";
 import { GetServerSidePropsContext } from "next";
 import safeJsonStringify from "safe-json-stringify";
@@ -10,7 +11,15 @@ type CommunityPageProps = {
 };
 
 export default function CommunityPage({ communityData }: CommunityPageProps) {
-  return <Flex>Hello {communityData.id}</Flex>;
+  if (!communityData) {
+    return <CommunityNotFound />;
+  }
+
+  return (
+    <>
+      <Header communityData={communityData} />
+    </>
+  );
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
@@ -25,9 +34,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     return {
       props: {
-        communityData: JSON.parse(
-          safeJsonStringify({ id: communityDoc.id, ...communityDoc.data() })
-        ),
+        communityData: communityDoc.exists()
+          ? JSON.parse(
+              safeJsonStringify({ id: communityDoc.id, ...communityDoc.data() })
+            )
+          : "",
       },
     };
   } catch (error) {
