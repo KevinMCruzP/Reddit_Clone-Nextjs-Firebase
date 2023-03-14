@@ -10,7 +10,7 @@ export type Community = {
   imageURL?: string;
 };
 
-type CommunitySnippet = {
+export type CommunitySnippet = {
   communityId: string;
   isModerator?: boolean;
   imageURL?: string;
