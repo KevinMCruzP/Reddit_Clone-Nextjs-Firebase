@@ -1,8 +1,9 @@
-import { Flex, Icon, Text } from "@chakra-ui/react";
+import { Flex, Icon } from "@chakra-ui/react";
 import { useState } from "react";
 import { BiPoll } from "react-icons/bi";
 import { BsLink45Deg, BsMic } from "react-icons/bs";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
+import TextInputs from "./PostForm/TextInputs";
 import { TabItem } from "./TabItem";
 
 type NewPostFormProps = {};
@@ -49,7 +50,14 @@ export default function NewPostForm() {
 
   const onSelectImage = () => {};
 
-  const onTextChange = () => {};
+  const onTextChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const {
+      target: { name, value },
+    } = event;
+    setTextInputs((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <Flex direction="column" bg="white" borderRadius={4} mt={2}>
@@ -64,8 +72,15 @@ export default function NewPostForm() {
           </>
         ))}
       </Flex>
-      <Flex>
-        <Text></Text>
+      <Flex p={4}>
+        {selectedTab === "Post" && (
+          <TextInputs
+            textInputs={textInputs}
+            handleCreatePost={handleCreatePost}
+            onChange={onTextChange}
+            loading={false}
+          />
+        )}
       </Flex>
     </Flex>
   );
