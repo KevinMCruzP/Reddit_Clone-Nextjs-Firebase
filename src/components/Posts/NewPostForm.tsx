@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BiPoll } from "react-icons/bi";
 import { BsLink45Deg, BsMic } from "react-icons/bs";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
+import ImageUpload from "./PostForm/ImageUpload";
 import TextInputs from "./PostForm/TextInputs";
 import { TabItem } from "./TabItem";
 
@@ -45,10 +46,23 @@ export default function NewPostForm() {
   });
 
   const [selectedFile, setSelectedFile] = useState<string>();
+  const [loading, setLoading] = useState(false);
 
   const handleCreatePost = async () => {};
 
-  const onSelectImage = () => {};
+  const onSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
+
+    if (event.target.files?.[0]) {
+      reader.readAsDataURL(event.target.files?.[0]);
+    }
+
+    reader.onload = (readerEvent) => {
+      if (readerEvent.target?.result) {
+        setSelectedFile(readerEvent.target.result as string);
+      }
+    };
+  };
 
   const onTextChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -63,13 +77,12 @@ export default function NewPostForm() {
     <Flex direction="column" bg="white" borderRadius={4} mt={2}>
       <Flex width="100%">
         {formTabs.map((item) => (
-          <>
-            <TabItem
-              item={item}
-              selected={item.title === selectedTab}
-              setSelectTab={setSelectedTab}
-            />
-          </>
+          <TabItem
+            key={item.title}
+            item={item}
+            selected={item.title === selectedTab}
+            setSelectTab={setSelectedTab}
+          />
         ))}
       </Flex>
       <Flex p={4}>
@@ -78,7 +91,16 @@ export default function NewPostForm() {
             textInputs={textInputs}
             handleCreatePost={handleCreatePost}
             onChange={onTextChange}
-            loading={false}
+            loading={loading}
+          />
+        )}
+
+        {selectedTab === "Images & Video" && (
+          <ImageUpload
+            onSelectImage={onSelectImage}
+            selectedFile={selectedFile}
+            setSelectedTab={setSelectedTab}
+            setSelectedFile={setSelectedFile}
           />
         )}
       </Flex>

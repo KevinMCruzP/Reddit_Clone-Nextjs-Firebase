@@ -59,8 +59,9 @@ export default function TextInputs({
         <Button
           height="34px"
           padding="0px 30px"
-          disabled={false}
-          onClick={() => console.log("Post")}
+          disabled={!textInputs.title}
+          isLoading={loading}
+          onClick={handleCreatePost}
         >
           Post
         </Button>
