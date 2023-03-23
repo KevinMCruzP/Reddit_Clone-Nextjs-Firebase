@@ -95,15 +95,15 @@ export default function NewPostForm({ user }: NewPostFormProps) {
           imageUrl: downloadURL,
         });
       }
+
+      //Redirect the user back to the communityPage using the router
+      router.back();
     } catch (error: any) {
       console.log("handleCreatePost error: ", error.message);
       setError(true);
     }
 
     setLoading(false);
-
-    //Redirect the user back to the communityPage using the router
-    // router.back();
   };
 
   const onSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {

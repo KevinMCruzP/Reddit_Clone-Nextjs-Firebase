@@ -7,13 +7,13 @@ export type Community = {
   numberOfMembers: number;
   privacyType: "public" | "private" | "restricted";
   createdAt?: Timestamp;
-  imageURL?: string;
+  imageUrl?: string;
 };
 
 export type CommunitySnippet = {
   communityId: string;
   isModerator?: boolean;
-  imageURL?: string;
+  imageUrl?: string;
 };
 
 type CommunityState = {

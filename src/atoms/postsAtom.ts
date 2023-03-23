@@ -9,8 +9,8 @@ export type Post = {
   body: string;
   numberOfComments: number;
   voteStatus: number;
-  imageURL?: string;
-  communityImageURL?: string;
+  imageUrl?: string;
+  communityImageUrl?: string;
   createdAt: Timestamp;
 };
 

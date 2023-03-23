@@ -76,7 +76,7 @@ export default function useCommunityData() {
       // creating a new community snippet
       const newSnippet: CommunitySnippet = {
         communityId: communityData.id,
-        imageURL: communityData.imageURL || "",
+        imageUrl: communityData.imageUrl || "",
       };
 
       batch.set(

@@ -19,7 +19,7 @@ export function Header({ communityData }: CommunityPageProps) {
       <Box height="50%" bg="blue.400" />
       <Flex justify="center" bg="white" flexGrow={1}>
         <Flex width="95%" maxWidth="860px">
-          {communityData.imageURL ? (
+          {communityData.imageUrl ? (
             <Image alt="Image" />
           ) : (
             <Icon
