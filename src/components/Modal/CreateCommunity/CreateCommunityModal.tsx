@@ -84,7 +84,7 @@ export default function CreateCommunityModal({
         // Create community
         transaction.set(communityDocRef, {
           creatorId: user?.uid,
-          createAt: serverTimestamp(),
+          createdAt: serverTimestamp(),
           numberOfMembers: 1,
           privacyType: communityType,
         });
