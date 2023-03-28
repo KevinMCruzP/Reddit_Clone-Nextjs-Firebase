@@ -19,8 +19,17 @@ export function Header({ communityData }: CommunityPageProps) {
       <Box height="50%" bg="blue.400" />
       <Flex justify="center" bg="white" flexGrow={1}>
         <Flex width="95%" maxWidth="860px">
-          {communityData.imageUrl ? (
-            <Image alt="Image" />
+          {communityStateValue.currentCommunity?.imageUrl ? (
+            <Image
+              borderRadius="full"
+              boxSize="66px"
+              src={communityStateValue.currentCommunity.imageUrl}
+              alt="Image"
+              position="relative"
+              top={-3}
+              color="blue.500"
+              border="4px solid white"
+            />
           ) : (
             <Icon
               as={FaReddit}
@@ -29,7 +38,7 @@ export function Header({ communityData }: CommunityPageProps) {
               top={-3}
               color="blue.500"
               border="4px solid white"
-              borderRadius="50%"
+              borderRadius="full"
             />
           )}
 
