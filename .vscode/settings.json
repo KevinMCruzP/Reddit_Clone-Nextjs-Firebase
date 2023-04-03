@@ -3,5 +3,6 @@
     "BWMYD",
     "Fvxg",
     "googlelogo"
-  ]
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
