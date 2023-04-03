@@ -21,7 +21,6 @@ export default function PageContent({ children }: PageContentProps) {
           direction="column"
           display={{ base: "none", md: "flex" }}
           flexGrow={1}
-          border="1px solid orange"
         >
           {children && children[1 as keyof typeof children]}
         </Flex>
