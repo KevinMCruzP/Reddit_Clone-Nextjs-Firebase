@@ -1,4 +1,6 @@
+import { defaultMenuItem } from "@/src/atoms/directoryMenuItem";
 import { auth } from "@/src/firebase/clientApp";
+import useDirectory from "@/src/hooks/useDirectory";
 import { Flex, Image } from "@chakra-ui/react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Directory from "./Directory/Directory";
@@ -7,7 +9,7 @@ import SearchInput from "./SearchInput";
 
 export default function Navbar() {
   const [user, loading, error] = useAuthState(auth);
-
+  const { onSelectMenuItem } = useDirectory();
   return (
     <Flex
       bg="white"
@@ -19,6 +21,8 @@ export default function Navbar() {
         align="center"
         width={{ base: "40px", md: "auto" }}
         mr={{ base: 0, md: 2 }}
+        cursor="pointer"
+        onClick={() => onSelectMenuItem(defaultMenuItem)}
       >
         <Image src="/images/redditFace.svg" alt="reddit face" height="30px" />
         <Image

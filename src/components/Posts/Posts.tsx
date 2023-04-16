@@ -58,7 +58,7 @@ function Posts({ communityData }: PostsProps) {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [communityData]);
 
   return (
     <>
