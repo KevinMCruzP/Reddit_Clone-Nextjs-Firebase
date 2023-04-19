@@ -60,6 +60,7 @@ export default function useCommunityData() {
       setCommunityStateValue((prev) => ({
         ...prev,
         mySnippets: snippets as CommunitySnippet[],
+        snippetsFetched: true,
       }));
 
       console.log("here are snippets", snippets);
@@ -166,6 +167,7 @@ export default function useCommunityData() {
       setCommunityStateValue((prev) => ({
         ...prev,
         mySnippets: [],
+        snippetsFetched: false,
       }));
       return;
     }
