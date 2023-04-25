@@ -10,11 +10,9 @@ export default function SearchInput({ user }: SearchInputProps) {
   return (
     <Flex flexGrow={1} maxWidth={user ? "auto" : "600px"} mr={2} align="center">
       <InputGroup>
-        <InputLeftElement
-          pointerEvents="none"
-          // eslint-disable-next-line react/no-children-prop
-          children={<SearchIcon color="gray.300" />}
-        />
+        <InputLeftElement pointerEvents="none">
+          <SearchIcon color="gray.400" mb={1} />
+        </InputLeftElement>
         <Input
           type="text"
           placeholder="Search Reddit"
